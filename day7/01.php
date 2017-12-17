@@ -25,12 +25,12 @@ array_map(function ($n) use (&$mapa, &$left, &$right) {
     $head = trim(strtok($n, " "));
     $mapa[$head]['weight'] = (int)trim(strtok(")"), '\(\)');
     if (stripos($n, '>') > 0) {
-        $mapa[$head]['node'] = explode(', ', trim(explode(">", $n)[1]));
+        $mapa[$head]['Node'] = explode(', ', trim(explode(">", $n)[1]));
     } else {
-        $mapa[$head]['node'] = [];
+        $mapa[$head]['Node'] = [];
     }
     $left[$head] = $head;
-    foreach ($mapa[$head]['node'] as $val) {
+    foreach ($mapa[$head]['Node'] as $val) {
         $right[$val] = trim($val);
     }
 }, $array);
@@ -42,7 +42,7 @@ function sumWeight($root, $mapa)
 {
     $weight = $mapa[$root]['weight'];
     $weights = [];
-    foreach ($mapa[$root]['node'] as $node) {
+    foreach ($mapa[$root]['Node'] as $node) {
         $weights[$node] = sumWeight($node, $mapa);
         $weight += $weights[$node];
     }
